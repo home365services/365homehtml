@@ -680,6 +680,37 @@
 
 
 /* Promo Modal */
+.promo-trigger {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: var(--grad-primary);
+    color: var(--white);
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    z-index: 999;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(102, 0, 51, 0.4);
+    animation: giftBoxRotate 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes giftBoxRotate {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    25% { transform: translateY(-10px) rotate(-15deg); }
+    50% { transform: translateY(-15px) rotate(0); }
+    75% { transform: translateY(-10px) rotate(15deg); }
+}
+
+.promo-trigger:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(102, 0, 51, 0.5);
+}
+
 .promo-modal {
     position: fixed;
     top: 0;
@@ -687,7 +718,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    display: none; /* Hidden by default */
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 10000;
@@ -696,32 +727,36 @@
 
 .promo-modal.active {
     display: flex;
-    animation: fadeIn 0.4s ease;
 }
 
 .promo-content {
     background: var(--white);
     width: 90%;
-    max-width: 500px;
+    max-width: 450px;
     border-radius: 30px;
-    padding: 50px 40px;
+    padding: 40px;
     position: relative;
     text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    animation: slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    border: 2px solid var(--secondary);
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .promo-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     background: var(--bg-light);
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -737,29 +772,35 @@
 }
 
 .promo-icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: var(--grad-primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px;
+    margin: 0 auto 20px;
     color: var(--white);
-    font-size: 2.5rem;
+    font-size: 2rem;
     box-shadow: 0 10px 20px rgba(102, 0, 51, 0.2);
+    animation: iconRotate 3s linear infinite;
+}
+
+@keyframes iconRotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
 
 .promo-content h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--primary);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .promo-main-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--text-dark);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: 500;
 }
 
@@ -767,15 +808,15 @@
     font-weight: 800;
     color: var(--accent-gold);
     background: #fef3c7;
-    padding: 2px 8px;
-    border-radius: 5px;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 .promo-timer {
     background: var(--bg-light);
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 35px;
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 25px;
     border: 1px dashed var(--secondary);
 }
 
@@ -788,36 +829,37 @@
 }
 
 #timer-display {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
     color: var(--primary);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .promo-btn {
     width: 100%;
-    padding: 18px;
-    font-size: 1.1rem;
+    padding: 14px;
+    font-size: 1rem;
     border-radius: 50px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px) scale(0.9); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@media (max-width: 576px) {
-    .promo-content {
-        padding: 40px 25px;
+@media (max-width: 768px) {
+    .promo-trigger {
+        width: 55px;
+        height: 55px;
+        padding: 0;
+        border-radius: 50%;
+        justify-content: center;
+        bottom: 30px;
+        left: 30px;
     }
-    .promo-content h2 { font-size: 1.6rem; }
-    #timer-display { font-size: 2rem; }
+    .promo-trigger span {
+        display: none;
+    }
+    .promo-content {
+        padding: 30px 20px;
+        width: 95%;
+    }
 }
 
 .success-icon {

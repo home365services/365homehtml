@@ -251,6 +251,7 @@ const appRouter = {
 
     initPromoBanner: () => {
         const promoModal = document.getElementById('promo-banner');
+        const promoTrigger = document.getElementById('promo-trigger');
         const closeBtn = document.getElementById('close-promo');
         const timerDisplay = document.getElementById('timer-display');
         const startClaimBtn = document.getElementById('start-claim');
@@ -258,16 +259,22 @@ const appRouter = {
         const initialState = document.getElementById('promo-initial-state');
         const successState = document.getElementById('promo-success');
         
-        if (!promoModal) return;
+        if (!promoModal || !promoTrigger) return;
 
-        // Show banner after 2 seconds delay
+        // Show trigger after 2 seconds delay
         setTimeout(() => {
             if (!sessionStorage.getItem('promo_shown')) {
-                promoModal.classList.add('active');
+                promoTrigger.style.display = 'flex';
                 appRouter.startPromoTimer(30 * 60, timerDisplay);
-                sessionStorage.setItem('promo_shown', 'true');
             }
         }, 2000);
+
+        // Clicking trigger shows the modal
+        promoTrigger.addEventListener('click', () => {
+            promoModal.classList.add('active');
+            promoTrigger.style.display = 'none'; // Hide trigger when modal is open
+            sessionStorage.setItem('promo_shown', 'true');
+        });
 
         // Transition to Form
         if (startClaimBtn) {
@@ -276,31 +283,22 @@ const appRouter = {
                 if (claimForm) claimForm.style.display = 'block';
             });
         }
-
-        // Handle Form Submission
+        
+        // ... rest of the logic remains same ...
         if (claimForm) {
             claimForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                
                 const name = document.getElementById('promo-name').value;
                 const whatsapp = document.getElementById('promo-whatsapp').value;
                 const address = document.getElementById('promo-address').value;
-                
-                // Generate Random Coupon
                 const randomCode = Math.floor(100000 + Math.random() * 900000);
                 const coupon = `365h${randomCode}`;
-                
-                // Update Success UI
                 const couponDisplay = document.getElementById('coupon-code');
                 if (couponDisplay) couponDisplay.textContent = coupon;
-                
                 claimForm.style.display = 'none';
                 if (successState) successState.style.display = 'block';
-                
-                // Send to WhatsApp
                 const ownerNumber = "919103826966";
                 const message = `*NEW PROMO CLAIM*\n\n*Name:* ${name}\n*WhatsApp:* ${whatsapp}\n*Address:* ${address}\n*Coupon:* ${coupon}`;
-                
                 setTimeout(() => {
                     window.open(`https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`, '_blank');
                 }, 1500);
@@ -310,6 +308,11 @@ const appRouter = {
         if (closeBtn) {
             closeBtn.addEventListener('click', () => {
                 promoModal.classList.remove('active');
+                // Re-show trigger if they closed it without finishing? 
+                // Let's keep it hidden if they close it, or show it again.
+                // User said "when anyone click on this the details will shown", 
+                // so maybe we should show it again if they close.
+                promoTrigger.style.display = 'flex';
             });
         }
     },
