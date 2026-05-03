@@ -2,19 +2,6 @@ const UI = {
     renderHome: () => {
         const app = document.getElementById('app');
         app.innerHTML = `
-            <div class="search-strip">
-                <div class="container">
-                    <div class="search-container">
-                        <input type="text" id="service-search-input" class="search-input" placeholder="${t('searchPlaceholder')}">
-                        <div class="location-pick">
-                            <i class="fas fa-location-dot"></i>
-                            <span>Uluberia, WB</span>
-                        </div>
-                        <button class="btn btn-primary" onclick="UI.filterServices()">${t('searchBtn')}</button>
-                    </div>
-                </div>
-            </div>
-
             <section class="hero">
                 <div class="hero-slider" id="main-slider">
                     <!-- Slides... -->
@@ -106,6 +93,20 @@ const UI = {
                     </div>
                 </div>
             </section>
+
+            <div class="search-strip">
+                <div class="container">
+                    <div class="search-container">
+                        <input type="text" id="service-search-input" class="search-input" placeholder="${t('searchPlaceholder')}">
+                        <div class="location-pick">
+                            <i class="fas fa-location-dot"></i>
+                            <span>Uluberia, WB</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="UI.filterServices()">${t('searchBtn')}</button>
+                    </div>
+                </div>
+            </div>
+
             <section class="container services-section" id="services">
                 <div class="section-header">
                     <div>

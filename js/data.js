@@ -6,7 +6,7 @@ const SERVICES = [
         name: 'Electrical Engineering',
         name_bn: 'ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং',
         icon: 'fa-bolt-lightning',
-        image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?w=400&h=400&fit=crop',
+        image: 'assets/service_electrical_engineering_premium.png',
         description: 'Professional industrial and commercial electrical solutions.',
         description_bn: 'পেশাদার শিল্প ও বাণিজ্যিক ইলেকট্রিক্যাল সমাধান।',
         price: 'Starts at ₹1499',

@@ -263,10 +263,8 @@ const appRouter = {
 
         // Show trigger after 2 seconds delay
         setTimeout(() => {
-            if (!sessionStorage.getItem('promo_shown')) {
-                promoTrigger.style.display = 'flex';
-                appRouter.startPromoTimer(30 * 60, timerDisplay);
-            }
+            promoTrigger.style.display = 'flex';
+            appRouter.startPromoTimer(30 * 60, timerDisplay);
         }, 2000);
 
         // Clicking trigger shows the modal
